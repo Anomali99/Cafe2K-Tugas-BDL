@@ -4,29 +4,29 @@
  */
 package view;
 
-import dao.DaoPelanggan;
+import dao.DaoSupplier;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import servis.ServisPelanggan;
-import tabel.TabelPelanggan;
+import servis.ServisSupplier;
+import tabel.TabelSupplier;
 
 /**
  *
  * @author fatiq
  */
-public class MenuPelanggan extends javax.swing.JPanel {
+public class MenuSupplier extends javax.swing.JPanel {
 
     /**
      * Creates new form MenuPetugas
      */
-    private final TabelPelanggan tbl = new TabelPelanggan();
-    private ServisPelanggan servis = new DaoPelanggan();
+    private final TabelSupplier tbl = new TabelSupplier();
+    private ServisSupplier servis = new DaoSupplier();
 
-    public MenuPelanggan() {
+    public MenuSupplier() {
         initComponents();
         tblConten.setModel(tbl);
         resetData();
@@ -142,8 +142,8 @@ public class MenuPelanggan extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(79, 42, 24));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user1.png"))); // NOI18N
-        jLabel1.setText("Data Pelanggan");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/supplier1.png"))); // NOI18N
+        jLabel1.setText("Data Supplier");
 
         btn_cari.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         btn_cari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cari.png"))); // NOI18N
@@ -306,10 +306,10 @@ public class MenuPelanggan extends javax.swing.JPanel {
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         if (!btnHapus.isVisible()) {
-            new TambahPelanggan(null, true).setVisible(true);
+            new TambahSupplier(null, true).setVisible(true);
         } else {
             String s = (String) tblConten.getValueAt(tblConten.getSelectedRow(), 1);
-            new TambahPelanggan(null, true, s).setVisible(true);
+            new TambahSupplier(null, true, s).setVisible(true);
         }
         resetData();
     }//GEN-LAST:event_btnTambahActionPerformed
@@ -317,7 +317,7 @@ public class MenuPelanggan extends javax.swing.JPanel {
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         String s = (String) tblConten.getValueAt(tblConten.getSelectedRow(), 1);
         ImageIcon icon = new ImageIcon(getClass().getResource("/img/hapus1.png"));
-        if (JOptionPane.showConfirmDialog(null, "Menghapus pelanggan dengan ID " + s, "Apakah anda yakin", 0, 0, icon) == 0) {
+        if (JOptionPane.showConfirmDialog(null, "Menghapus supplier dengan ID " + s, "Apakah anda yakin", 0, 0, icon) == 0) {
             servis.hapusData(s);
         }
         resetData();
