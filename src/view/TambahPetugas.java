@@ -206,7 +206,7 @@ public class TambahPetugas extends javax.swing.JPanel {
         jLabel11.setText("Level");
 
         cbxLevel.setForeground(new java.awt.Color(79, 42, 24));
-        cbxLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Level--", "Admin", "Kasir", "Staff " }));
+        cbxLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Level--", "Admin", "Kasir", "Koki", "Gudang" }));
         cbxLevel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(79, 42, 24)));
 
         tfFoto.setEditable(false);
