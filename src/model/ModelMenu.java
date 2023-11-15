@@ -116,4 +116,16 @@ public class ModelMenu {
     public void setJmlBahan(List<Integer> jmlBahan) {
         this.jmlBahan = jmlBahan;
     }
+    
+    public String getAllBahan(){
+        String s = "";
+        for(int i = 0; i < bahan.size(); i++){
+            if(i==0){
+                s = bahan.get(i).getNama() +" "+ jmlBahan.get(i)+"x";
+            } else {
+                s = s +", "+bahan.get(i).getNama() +" "+ jmlBahan.get(i)+"x";
+            }
+        }
+        return s;
+    }
 }
