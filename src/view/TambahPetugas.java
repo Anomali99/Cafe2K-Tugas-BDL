@@ -351,7 +351,7 @@ public class TambahPetugas extends javax.swing.JPanel {
                 .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBatal)
                     .addComponent(btnSimpan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );

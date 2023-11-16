@@ -314,7 +314,7 @@ public class MenuBahan extends javax.swing.JPanel {
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         String s = (String) tblConten.getValueAt(tblConten.getSelectedRow(), 1);
         ImageIcon icon = new ImageIcon(getClass().getResource("/img/hapus1.png"));
-        if (JOptionPane.showConfirmDialog(null, "Menghapus pelanggan dengan ID " + s, "Apakah anda yakin", 0, 0, icon) == 0) {
+        if (JOptionPane.showConfirmDialog(null, "Menghapus bahan dengan Kode " + s, "Apakah anda yakin", 0, 0, icon) == 0) {
             servis.hapusData(s);
         }
         resetData();
