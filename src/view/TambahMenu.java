@@ -536,6 +536,7 @@ public class TambahMenu extends javax.swing.JDialog {
         dj.setVisible(true);
         tfKodeBahan.setText(dj.kode);
         tfNamaBahan.setText(dj.nama);
+        tfJmlBahan.setText("0");
         jLabel1.requestFocus();
     }//GEN-LAST:event_jButton2ActionPerformed
 

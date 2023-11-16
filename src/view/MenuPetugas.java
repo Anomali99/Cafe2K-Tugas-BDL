@@ -308,6 +308,7 @@ public class MenuPetugas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        MenuUtama.setAktif(false);
         if (!btnBatal.isVisible()) {
             pn.removeAll();
             pn.add(new TambahPetugas(pn));

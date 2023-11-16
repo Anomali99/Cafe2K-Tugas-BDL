@@ -468,6 +468,7 @@ public class TambahPetugas extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void back() {
+        MenuUtama.setAktif(true);
         pn.removeAll();
         pn.add(new MenuPetugas(pn));
         pn.repaint();

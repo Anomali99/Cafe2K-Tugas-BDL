@@ -247,6 +247,9 @@ public class MenuMenu extends javax.swing.JPanel {
             case 1:
                 list = servis.getByNama(sc);
                 break;
+            case 2:
+                list = servis.getByBahan(sc);
+                break;
         }
         tbl.setData(list);
     }//GEN-LAST:event_btn_cariActionPerformed

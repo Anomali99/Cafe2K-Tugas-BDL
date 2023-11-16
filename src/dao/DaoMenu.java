@@ -94,7 +94,6 @@ public class DaoMenu implements ServisMenu {
             st = conn.prepareStatement(sql);
             st.setString(1, id);
             st.setString(2, id);
-            st.setString(3, id);
             st.executeUpdate();
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
@@ -381,9 +380,10 @@ public class DaoMenu implements ServisMenu {
         ResultSet rs = null;
         List list = new ArrayList();
         List list1 = new ArrayList();
-        String sql = "SELECT * FROM detail_bahan";
+        String sql = "SELECT * FROM detail_bahan WHERE kode_menu = ?";
         try {
             st = conn.prepareStatement(sql);
+            st.setString(1, mod.getKode());
             rs = st.executeQuery();
             while (rs.next()) {
                 mod.setJmlMenu(rs.getInt("jumlah_menu"));

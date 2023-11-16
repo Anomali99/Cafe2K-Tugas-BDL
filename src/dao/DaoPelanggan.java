@@ -267,9 +267,7 @@ public class DaoPelanggan implements ServisPelanggan {
         String urutan = null;
 
         Date now = new Date();
-        SimpleDateFormat tanggal = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat nonformat = new SimpleDateFormat("yyMMdd");
-        String tgl = tanggal.format(now);
         String no = nonformat.format(now);
 
         String sql = "SELECT RIGHT (id_pelanggan, 3) AS nomor "

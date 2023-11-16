@@ -5,9 +5,12 @@
 package view;
 
 import custom.MenuCustom;
+import dao.DaoPetugas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import model.ModelPegawai;
+import servis.ServisPetugas;
 
 /**
  *
@@ -19,10 +22,21 @@ public class MenuUtama extends javax.swing.JFrame {
      * Creates new form MenuUtama
      */
     public static boolean aktif = true;
+    public static ModelPegawai mod = new ModelPegawai();
+    private ServisPetugas servis = new DaoPetugas();
 
     public MenuUtama() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ModelPegawai mod = servis.getById("PT001");
+        this.mod = mod;
+        setEvent();
+        btn_dasbor.tekan();
+    }
+    public MenuUtama(ModelPegawai mod) {
+        initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.mod = mod;
         setEvent();
         btn_dasbor.tekan();
     }
@@ -45,6 +59,8 @@ public class MenuUtama extends javax.swing.JFrame {
         btn_supplier = new custom.MenuCustom();
         btn_pelanggan = new custom.MenuCustom();
         btn_petugas = new custom.MenuCustom();
+        btn_laporan = new custom.MenuCustom();
+        btn_memasak = new custom.MenuCustom();
         jPanelGradient1 = new custom.JPanelGradient();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -95,6 +111,16 @@ public class MenuUtama extends javax.swing.JFrame {
         btn_petugas.setaLebel("Petugas");
         btn_petugas.setaSelect(new java.awt.Color(79, 42, 24));
 
+        btn_laporan.setaBacground3(new java.awt.Color(166, 145, 138));
+        btn_laporan.setaIcon(new javax.swing.ImageIcon(getClass().getResource("/img/laporan.png"))); // NOI18N
+        btn_laporan.setaLebel("Laporan");
+        btn_laporan.setaSelect(new java.awt.Color(79, 42, 24));
+
+        btn_memasak.setaBacground3(new java.awt.Color(166, 145, 138));
+        btn_memasak.setaIcon(new javax.swing.ImageIcon(getClass().getResource("/img/masak.png"))); // NOI18N
+        btn_memasak.setaLebel("Memasak");
+        btn_memasak.setaSelect(new java.awt.Color(79, 42, 24));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -109,7 +135,9 @@ public class MenuUtama extends javax.swing.JFrame {
                     .addComponent(btn_supply, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_supplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_pelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_petugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_petugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_laporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_memasak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,12 +154,16 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_supply, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_memasak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_supplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_pelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_petugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_laporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
@@ -224,6 +256,8 @@ public class MenuUtama extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private custom.MenuCustom btn_bahan;
     private custom.MenuCustom btn_dasbor;
+    private custom.MenuCustom btn_laporan;
+    private custom.MenuCustom btn_memasak;
     private custom.MenuCustom btn_menu;
     private custom.MenuCustom btn_pelanggan;
     private custom.MenuCustom btn_pembelian;
@@ -253,6 +287,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supplier.reset();
                 btn_pelanggan.reset();
                 btn_petugas.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
                 pn_main.add(new MenuDasbor());
@@ -270,6 +306,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supplier.reset();
                 btn_pelanggan.reset();
                 btn_petugas.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
                 pn_main.add(new MenuMenu());
@@ -287,6 +325,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supplier.reset();
                 btn_pelanggan.reset();
                 btn_petugas.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
                 pn_main.add(new MenuBahan());
@@ -304,9 +344,11 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supplier.reset();
                 btn_pelanggan.reset();
                 btn_petugas.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
-//                pn_main.add(new MenuPetugas());
+                pn_main.add(new MenuPembelian(pn_main));
                 pn_main.repaint();
                 pn_main.revalidate();
             }
@@ -321,6 +363,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supplier.reset();
                 btn_pelanggan.reset();
                 btn_petugas.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
 //                pn_main.add(new MenuPetugas());
@@ -338,6 +382,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supply.reset();
                 btn_pelanggan.reset();
                 btn_petugas.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
                 pn_main.add(new MenuSupplier());
@@ -355,6 +401,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supply.reset();
                 btn_supplier.reset();
                 btn_petugas.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
                 pn_main.add(new MenuPelanggan());
@@ -372,9 +420,49 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supply.reset();
                 btn_supplier.reset();
                 btn_pelanggan.reset();
+                btn_memasak.reset();
+                btn_laporan.reset();
                 
                 pn_main.removeAll();
                 pn_main.add(new MenuPetugas(pn_main));
+                pn_main.repaint();
+                pn_main.revalidate();
+            }
+        });
+        btn_memasak.setAct(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btn_dasbor.reset();
+                btn_menu.reset();
+                btn_bahan.reset();
+                btn_pembelian.reset();
+                btn_supply.reset();
+                btn_supplier.reset();
+                btn_pelanggan.reset();
+                btn_petugas.reset();
+                btn_laporan.reset();
+                
+                pn_main.removeAll();
+//                pn_main.add(new MenuPetugas(pn_main));
+                pn_main.repaint();
+                pn_main.revalidate();
+            }
+        });
+        btn_laporan.setAct(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btn_dasbor.reset();
+                btn_menu.reset();
+                btn_bahan.reset();
+                btn_pembelian.reset();
+                btn_supply.reset();
+                btn_petugas.reset();
+                btn_supplier.reset();
+                btn_pelanggan.reset();
+                btn_memasak.reset();
+                
+                pn_main.removeAll();
+//                pn_main.add(new MenuPetugas(pn_main));
                 pn_main.repaint();
                 pn_main.revalidate();
             }

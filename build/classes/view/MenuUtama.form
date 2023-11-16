@@ -53,6 +53,8 @@
                       <Component id="btn_supplier" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_pelanggan" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_petugas" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_laporan" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_memasak" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
@@ -72,12 +74,16 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btn_supply" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_memasak" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btn_supplier" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btn_pelanggan" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btn_petugas" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="122" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_laporan" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -189,6 +195,34 @@
               <Image iconType="3" name="/img/petugas.png"/>
             </Property>
             <Property name="aLebel" type="java.lang.String" value="Petugas"/>
+            <Property name="aSelect" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="18" green="2a" red="4f" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="custom.MenuCustom" name="btn_laporan">
+          <Properties>
+            <Property name="aBacground3" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="8a" green="91" red="a6" type="rgb"/>
+            </Property>
+            <Property name="aIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/laporan.png"/>
+            </Property>
+            <Property name="aLebel" type="java.lang.String" value="Laporan"/>
+            <Property name="aSelect" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="18" green="2a" red="4f" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="custom.MenuCustom" name="btn_memasak">
+          <Properties>
+            <Property name="aBacground3" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="8a" green="91" red="a6" type="rgb"/>
+            </Property>
+            <Property name="aIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/masak.png"/>
+            </Property>
+            <Property name="aLebel" type="java.lang.String" value="Memasak"/>
             <Property name="aSelect" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="18" green="2a" red="4f" type="rgb"/>
             </Property>

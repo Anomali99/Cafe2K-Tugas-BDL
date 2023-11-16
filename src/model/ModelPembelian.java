@@ -91,14 +91,14 @@ public class ModelPembelian {
     /**
      * @return the detail
      */
-    public List<ModelDetailP> getDetaiPelanggan() {
+    public List<ModelDetailP> getDetail() {
         return detail;
     }
 
     /**
      * @param detaiPelanggan the detail to set
      */
-    public void setDetaiPelanggan(List<ModelDetailP> detaiPelanggan) {
+    public void setDetail(List<ModelDetailP> detaiPelanggan) {
         this.detail = detaiPelanggan;
     }
 }

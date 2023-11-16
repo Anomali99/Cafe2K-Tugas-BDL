@@ -5,9 +5,9 @@
 package view;
 
 import dao.DaoBahan;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import model.ModelBahan;
 import servis.ServisBahan;
 import tabel.TabelBahan;
 
@@ -23,13 +23,13 @@ public class PilihBahan extends javax.swing.JDialog {
     int xx, xy;
     private final TabelBahan tbl = new TabelBahan();
     private ServisBahan servis = new DaoBahan();
-    private ModelBahan mod = new ModelBahan();
     public String kode = "";
     public String nama = "";
     
     public PilihBahan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setBackground(new Color(0, 0, 0, 0));
         tblConten.setModel(tbl);
         tbl.setData(servis.ambilData());
         jLabel1.requestFocus();
@@ -219,7 +219,7 @@ public class PilihBahan extends javax.swing.JDialog {
             .addGroup(jPanelCustom1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(0, 434, Short.MAX_VALUE))
+                .addGap(0, 455, Short.MAX_VALUE))
             .addGroup(jPanelCustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustom1Layout.createSequentialGroup()
                     .addContainerGap(30, Short.MAX_VALUE)
