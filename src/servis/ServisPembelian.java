@@ -18,6 +18,8 @@ public interface ServisPembelian {
     List<ModelPembelian> ambilData();
     List<ModelPembelian> getByNO(String no);
     List<ModelPembelian> getByTanggal(String tanggal);
+    List<ModelPembelian> getByPetugas(String nama);
+    List<ModelPembelian> getByPelanggan(String nama);
     ModelPembelian getByNo(String no);
     String getNomer();
 }

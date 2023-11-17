@@ -12,8 +12,11 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.TableColumnModel;
 import model.ModelPembelian;
 import servis.ServisPembelian;
+import tabel.TabelDetailP;
 import tabel.TabelPembelian;
 
 /**
@@ -26,6 +29,7 @@ public class MenuPembelian extends javax.swing.JPanel {
      * Creates new form MenuPetugas
      */
     private final TabelPembelian tbl = new TabelPembelian();
+    private final TabelDetailP tblP = new TabelDetailP();
     private ServisPembelian servis = new DaoPembelian();
     private JPanel pn;
 
@@ -33,6 +37,13 @@ public class MenuPembelian extends javax.swing.JPanel {
         initComponents();
         this.pn = pn;
         tblConten.setModel(tbl);
+        tblConten1.setModel(tblP);
+        int[] tbC = {0,1,2};
+        int[] tbCW = {35,90,70};
+        int[] tbC1 = {0,1,5};
+        int[] tbC1W = {35,70,70};
+        setColWidht(tblConten, tbC, tbCW);
+        setColWidht(tblConten1, tbC1, tbC1W);
         resetData();
     }
 
@@ -190,7 +201,7 @@ public class MenuPembelian extends javax.swing.JPanel {
 
         cbx_cari.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         cbx_cari.setForeground(new java.awt.Color(204, 204, 204));
-        cbx_cari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "TANGGAL" }));
+        cbx_cari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "TANGGAL", "PETUGAS", "PELANGGAN" }));
         cbx_cari.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         pnDetail.setBackground(new java.awt.Color(255, 255, 255));
@@ -279,10 +290,10 @@ public class MenuPembelian extends javax.swing.JPanel {
         lbNamaPet.setForeground(new java.awt.Color(79, 42, 24));
         lbNamaPet.setText("Tanggal ");
 
-        btnBatal1.setBackground(new java.awt.Color(0, 0, 200));
+        btnBatal1.setBackground(new java.awt.Color(0, 200, 0));
         btnBatal1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnBatal1.setForeground(new java.awt.Color(0, 0, 200));
-        btnBatal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/batal1.png"))); // NOI18N
+        btnBatal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/report1.png"))); // NOI18N
         btnBatal1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 btnBatal1MouseMoved(evt);
@@ -348,11 +359,11 @@ public class MenuPembelian extends javax.swing.JPanel {
             pnDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDetailLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(pnDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfNo)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -456,6 +467,12 @@ public class MenuPembelian extends javax.swing.JPanel {
             case 1:
                 list = servis.getByTanggal(sc);
                 break;
+            case 2:
+                list = servis.getByPetugas(sc);
+                break;
+            case 3:
+                list = servis.getByPelanggan(sc);
+                break;
         }
         tbl.setData(list);
     }//GEN-LAST:event_btn_cariActionPerformed
@@ -529,6 +546,7 @@ public class MenuPembelian extends javax.swing.JPanel {
         lbNamaPel.setText(mb.getPelanggan().getNama());
         lbIdPet.setText(mb.getPegawai().getId());
         lbNamaPet.setText(mb.getPegawai().getNama());
+        tblP.setData(mb);
     }//GEN-LAST:event_tblContenMouseClicked
 
     private void tblConten1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConten1MouseClicked
@@ -536,11 +554,13 @@ public class MenuPembelian extends javax.swing.JPanel {
     }//GEN-LAST:event_tblConten1MouseClicked
 
     private void btnBatal1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatal1MouseMoved
-        // TODO add your handling code here:
+        btnBatal1.setForeground(Color.WHITE);
+        btnBatal1.setIcon(new ImageIcon(getClass().getResource("/img/report.png")));
     }//GEN-LAST:event_btnBatal1MouseMoved
 
     private void btnBatal1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatal1MouseExited
-        // TODO add your handling code here:
+        btnBatal1.setForeground(new Color(0, 200, 0));
+        btnBatal1.setIcon(new ImageIcon(getClass().getResource("/img/report1.png")));
     }//GEN-LAST:event_btnBatal1MouseExited
 
     private void btnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatal1ActionPerformed
@@ -589,5 +609,14 @@ public class MenuPembelian extends javax.swing.JPanel {
         pnDetail.setVisible(false);
         btnTambah.setVisible(true);
         jLabel1.requestFocus();
+    }
+
+    private void setColWidht(JTable tb, int[] noCol, int[] noColW) {
+        TableColumnModel tblModel = tb.getColumnModel();
+        for (int i = 0; i < noCol.length; i++) {
+            tblModel.getColumn(noCol[i]).setPreferredWidth(noColW[i]);
+            tblModel.getColumn(noCol[i]).setMaxWidth(noColW[i]);
+            tblModel.getColumn(noCol[i]).setMinWidth(noColW[i]);
+        }
     }
 }

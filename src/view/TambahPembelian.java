@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.ModelDetailP;
@@ -34,7 +35,7 @@ public class TambahPembelian extends javax.swing.JPanel {
     private ModelPelanggan modP = new ModelPelanggan();
     private ServisPembelian servis = new DaoPembelian();
     private ServisMenu servisM = new DaoMenu();
-    
+
     public TambahPembelian(JPanel pn) {
         initComponents();
         this.pn = pn;
@@ -88,6 +89,8 @@ public class TambahPembelian extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         tfHarga = new javax.swing.JTextField();
+        tfKet = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         btnTambah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -405,6 +408,23 @@ public class TambahPembelian extends javax.swing.JPanel {
         tfHarga.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfHarga.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
 
+        tfKet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfKet.setForeground(new java.awt.Color(79, 42, 24));
+        tfKet.setText("Tidak Ada");
+        tfKet.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfKet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfKetFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfKetFocusLost(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(79, 42, 24));
+        jLabel20.setText("Ketrangan");
+
         javax.swing.GroupLayout jPanelCustom5Layout = new javax.swing.GroupLayout(jPanelCustom5);
         jPanelCustom5.setLayout(jPanelCustom5Layout);
         jPanelCustom5Layout.setHorizontalGroup(
@@ -420,18 +440,8 @@ public class TambahPembelian extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(jPanelCustom5Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustom5Layout.createSequentialGroup()
                         .addComponent(tfNamaMenu)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustom5Layout.createSequentialGroup()
-                        .addGroup(jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelCustom5Layout.createSequentialGroup()
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(111, 111, 111))
-                            .addComponent(tfSubtotal, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())
                     .addGroup(jPanelCustom5Layout.createSequentialGroup()
                         .addGroup(jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -442,36 +452,51 @@ public class TambahPembelian extends javax.swing.JPanel {
                             .addGroup(jPanelCustom5Layout.createSequentialGroup()
                                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(tfHarga))
+                            .addComponent(tfHarga, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPanelCustom5Layout.createSequentialGroup()
+                        .addGroup(jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelCustom5Layout.createSequentialGroup()
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustom5Layout.createSequentialGroup()
+                        .addGroup(jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfKet, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSubtotal))
                         .addContainerGap())))
         );
         jPanelCustom5Layout.setVerticalGroup(
             jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCustom5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addGap(4, 4, 4)
                 .addGroup(jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfKode)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNamaMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCustom5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCustom5Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfJml, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCustom5Layout.createSequentialGroup()
-                        .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tfJml, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfHarga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfKet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -516,9 +541,9 @@ public class TambahPembelian extends javax.swing.JPanel {
             jPanelCustom3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustom3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCustom5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelCustom5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTambah)
                 .addContainerGap())
@@ -529,7 +554,7 @@ public class TambahPembelian extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Kode", "Nama", "Harga", "Jumlah", "Subtotal"
+                "Kode", "Nama", "Harga", "Jumlah", "Subtotal", "Keterangan"
             }
         ));
         tblMn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -633,7 +658,7 @@ public class TambahPembelian extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBatal1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnHapus, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))))
+                                .addComponent(btnHapus, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnTambahLayout.setVerticalGroup(
@@ -648,28 +673,26 @@ public class TambahPembelian extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnTambahLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnUbah)
-                            .addComponent(btnHapus)
-                            .addComponent(btnBatal1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(pnTambahLayout.createSequentialGroup()
-                        .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanelCustom3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnTambahLayout.createSequentialGroup()
-                                .addComponent(jPanelCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanelCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSimpan)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBatal)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanelCustom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(btnSimpan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBatal))
+                    .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTambahLayout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnUbah)
+                                .addComponent(btnHapus)
+                                .addComponent(btnBatal1)))
+                        .addComponent(jPanelCustom3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addContainerGap())
         );
 
@@ -697,36 +720,40 @@ public class TambahPembelian extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSimpanMouseExited
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        ModelPembelian mod = new ModelPembelian();        
-        mod.setNoPembelian(tfNo.getText());
-        mod.setPegawai(MenuUtama.mod);
-        mod.setPelanggan(modP);
-        mod.setTgl(tfTgl.getText());
-        mod.setTotal(Long.parseLong(tfTotal.getText()));
-        List<ModelDetailP> list = new ArrayList();
-        DefaultTableModel tbl = (DefaultTableModel) tblMn.getModel();        
-        int index = tbl.getRowCount() - 1;        
-        for (int i = 0; i <= index; i++) {
-            ModelDetailP p = new ModelDetailP();
-            ModelMenu bn = servisM.getByKode(tbl.getValueAt(i, 0).toString());
-            p.setMenu(bn);
-            p.setJml(Integer.parseInt(tbl.getValueAt(i, 3).toString()));
-            p.setSubtotal(Long.parseLong(tbl.getValueAt(i, 4).toString()));
-            p.setPegawai(MenuUtama.mod);
-            p.setPelanggan(modP);
-            p.setPembelian(mod);
-            p.setKeterangan(bn.getAllBahan());
-            list.add(p);
+        if (validPesanan()) {
+            ModelPembelian mod = new ModelPembelian();
+            mod.setNoPembelian(tfNo.getText());
+            mod.setPegawai(MenuUtama.mod);
+            mod.setPelanggan(modP);
+            mod.setTgl(tfTgl.getText());
+            mod.setTotal(Long.parseLong(tfTotal.getText()));
+            List<ModelDetailP> list = new ArrayList();
+            DefaultTableModel tbl = (DefaultTableModel) tblMn.getModel();
+            int index = tbl.getRowCount() - 1;
+            for (int i = 0; i <= index; i++) {
+                ModelDetailP p = new ModelDetailP();
+                ModelMenu bn = servisM.getByKode(tbl.getValueAt(i, 0).toString());
+                p.setMenu(bn);
+                p.setJml(Integer.parseInt(tbl.getValueAt(i, 3).toString()));
+                p.setSubtotal(Long.parseLong(tbl.getValueAt(i, 4).toString()));
+                p.setPegawai(MenuUtama.mod);
+                p.setPelanggan(modP);
+                p.setPembelian(mod);
+                p.setKeterangan(tbl.getValueAt(i, 5).toString());
+                list.add(p);
+            }
+            mod.setDetail(list);
+            servis.tambahData(mod);
+            resetTable();
+            tfNo.setText(servis.getNomer());
+            tfTotal.setText("");
+            tfId.setText("");
+            tfNama.setText("");
+            tbl.setRowCount(0);
+            modM = new ModelMenu();
+            modP = new ModelPelanggan();
         }
-        mod.setDetail(list);
-        servis.tambahData(mod);
-        resetTable();
-        tfNo.setText(servis.getNomer());
-        tfTotal.setText("");
-        tfId.setText("");
-        tfNama.setText("");
-        modM = new ModelMenu();
-        modP = new ModelPelanggan();
+        jLabel1.requestFocus();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -757,16 +784,19 @@ public class TambahPembelian extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTambahMouseExited
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        DefaultTableModel tbl = (DefaultTableModel) tblMn.getModel();
-        String kode = tfKode.getText();
-        String nama = tfNamaMenu.getText();
-        int jml = Integer.parseInt(tfJml.getText());
-        long harga = Long.parseLong(tfHarga.getText());
-        long subtotal = jml * harga;
-        tbl.addRow(new Object[]{kode, nama, harga, jml, subtotal});
-        tblMn.setModel(tbl);
-        resetTable();
-        setTotal();
+        if (validMenu()) {
+            DefaultTableModel tbl = (DefaultTableModel) tblMn.getModel();
+            String kode = tfKode.getText();
+            String nama = tfNamaMenu.getText();
+            int jml = Integer.parseInt(tfJml.getText());
+            long harga = Long.parseLong(tfHarga.getText());
+            long subtotal = jml * harga;
+            String ket = tfKet.getText();
+            tbl.addRow(new Object[]{kode, nama, harga, jml, subtotal, ket});
+            tblMn.setModel(tbl);
+            resetTable();
+            setTotal();
+        }
         jLabel1.requestFocus();
     }//GEN-LAST:event_btnTambahActionPerformed
 
@@ -796,7 +826,7 @@ public class TambahPembelian extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUbahMouseExited
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        
+
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void tblMnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMnMouseClicked
@@ -828,6 +858,16 @@ public class TambahPembelian extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tfJmlKeyTyped
 
+    private void tfKetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfKetFocusGained
+        if (tfKet.getText().equals("Tidak Ada"))
+            tfKet.setText("");
+    }//GEN-LAST:event_tfKetFocusGained
+
+    private void tfKetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfKetFocusLost
+        if (tfKet.getText().equals(""))
+            tfKet.setText("Tidak Ada");
+    }//GEN-LAST:event_tfKetFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatal;
@@ -848,6 +888,7 @@ public class TambahPembelian extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -864,6 +905,7 @@ public class TambahPembelian extends javax.swing.JPanel {
     private javax.swing.JTextField tfHarga;
     private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfJml;
+    private javax.swing.JTextField tfKet;
     private javax.swing.JTextField tfKode;
     private javax.swing.JTextField tfNama;
     private javax.swing.JTextField tfNamaMenu;
@@ -880,20 +922,21 @@ public class TambahPembelian extends javax.swing.JPanel {
         pn.repaint();
         pn.revalidate();
     }
-    
+
     void resetTable() {
         btnHapus.setVisible(false);
         btnUbah.setVisible(false);
         btnBatal1.setVisible(false);
         tblMn.setSelectionMode(0);
-        
+
         tfKode.setText("");
         tfNamaMenu.setText("");
         tfJml.setText("");
         tfHarga.setText("0");
         tfSubtotal.setText("0");
+        tfKet.setText("Tidak Ada");
     }
-    
+
     private void setTotal() {
         DefaultTableModel tbl = (DefaultTableModel) tblMn.getModel();
         long i = 0;
@@ -902,5 +945,29 @@ public class TambahPembelian extends javax.swing.JPanel {
         }
         tfTotal.setText(String.valueOf(i));
     }
-    
+
+    private boolean validMenu() {
+        boolean valid = true;
+        if (tfKode.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Pilih Menu terlebih dahulu");
+        } else if (tfJml.getText().equals("") || tfJml.getText().equals("0")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan jumlah pesanan terlebih dahulu");
+        }
+        return valid;
+    }
+
+    private boolean validPesanan() {
+        boolean valid = true;
+        if (tfId.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Pilih Pelangan terlebih dahulu");
+        } else if (tblMn.getRowCount() == 0) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Pilih Menu terlebih dahulu");
+        }
+        return valid;
+    }
+
 }

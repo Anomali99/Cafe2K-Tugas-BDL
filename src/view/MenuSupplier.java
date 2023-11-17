@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumnModel;
 import servis.ServisSupplier;
 import tabel.TabelSupplier;
 
@@ -29,6 +30,7 @@ public class MenuSupplier extends javax.swing.JPanel {
     public MenuSupplier() {
         initComponents();
         tblConten.setModel(tbl);
+        setColWidht();
         resetData();
     }
 
@@ -345,5 +347,16 @@ public class MenuSupplier extends javax.swing.JPanel {
         btnTambah.setIcon(new ImageIcon(getClass().getResource("/img/tambah1.png")));
         btnTambah.setVisible(true);
         jLabel1.requestFocus();
+    }
+
+    private void setColWidht() {
+        int[] noCol = {0,1,4};
+        int[] noColW = {35,70,120};
+        TableColumnModel tblModel = tblConten.getColumnModel();
+        for (int i = 0; i < noCol.length; i++) {
+            tblModel.getColumn(noCol[i]).setPreferredWidth(noColW[i]);
+            tblModel.getColumn(noCol[i]).setMaxWidth(noColW[i]);
+            tblModel.getColumn(noCol[i]).setMinWidth(noColW[i]);
+        }
     }
 }

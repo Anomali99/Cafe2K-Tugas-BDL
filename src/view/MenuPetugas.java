@@ -12,6 +12,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.TableColumnModel;
 import servis.ServisPetugas;
 import tabel.TabelPetugas;
 
@@ -32,6 +33,7 @@ public class MenuPetugas extends javax.swing.JPanel {
         initComponents();
         this.pn = pn;
         tblConten.setModel(tbl);
+        setColWidht();
         resetData();
     }
 
@@ -353,5 +355,16 @@ public class MenuPetugas extends javax.swing.JPanel {
         btnTambah.setIcon(new ImageIcon(getClass().getResource("/img/tambah1.png")));
         btnTambah.setVisible(true);
         jLabel1.requestFocus();
+    }
+
+    private void setColWidht() {
+        int[] noCol = {0,1,4,5,6};
+        int[] noColW = {35,70,120,200,90};
+        TableColumnModel tblModel = tblConten.getColumnModel();
+        for (int i = 0; i < noCol.length; i++) {
+            tblModel.getColumn(noCol[i]).setPreferredWidth(noColW[i]);
+            tblModel.getColumn(noCol[i]).setMaxWidth(noColW[i]);
+            tblModel.getColumn(noCol[i]).setMinWidth(noColW[i]);
+        }
     }
 }

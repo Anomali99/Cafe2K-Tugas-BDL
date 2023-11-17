@@ -4,6 +4,12 @@
  */
 package view;
 
+import dao.DaoMenu;
+import java.util.List;
+import javax.swing.JLabel;
+import model.ModelMenu;
+import servis.ServisMenu;
+
 /**
  *
  * @author fatiq
@@ -13,8 +19,23 @@ public class MenuDasbor extends javax.swing.JPanel {
     /**
      * Creates new form MenuPetugas
      */
+    private final ServisMenu servis = new DaoMenu();
+
     public MenuDasbor() {
         initComponents();
+        menu1.setText("");
+        harga1.setText("");
+        menu2.setText("");
+        harga2.setText("");
+        menu3.setText("");
+        harga3.setText("");
+        menu4.setText("");
+        harga4.setText("");
+        menu5.setText("");
+        harga5.setText("");
+        menu6.setText("");
+        harga6.setText("");
+        setMn();
     }
 
     /**
@@ -238,4 +259,14 @@ public class MenuDasbor extends javax.swing.JPanel {
     private javax.swing.JLabel menu5;
     private javax.swing.JLabel menu6;
     // End of variables declaration//GEN-END:variables
+
+    private void setMn() {
+        JLabel[] menu = {menu1,menu2,menu3,menu4,menu5,menu6};
+        JLabel[] harga = {harga1,harga2,harga3,harga4,harga5,harga6};
+        List<ModelMenu> mn = servis.getTerlaris();
+        for(int i = 0; i < mn.size(); i++){
+            menu[i].setText(mn.get(i).getNama());
+            harga[i].setText(String.valueOf(mn.get(i).getHarga()));
+        }
+    }
 }

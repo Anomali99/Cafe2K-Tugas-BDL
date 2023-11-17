@@ -145,15 +145,15 @@ public class DaoMenu implements ServisMenu {
         PreparedStatement st = null;
         List list = new ArrayList();
         ResultSet rs = null;
-        String sql = "SELECT menu.*\n"
-                + "FROM menu\n"
+        String sql = "SELECT m.*\n"
+                + "FROM menu m\n"
                 + "JOIN (\n"
-                + "    SELECT kode_menu, SUM(jumlah) AS jumlah_transaksi\n"
+                + "    SELECT kode_menu, SUM(jumlah) AS jml\n"
                 + "    FROM detail_pembelian\n"
                 + "    GROUP BY kode_menu\n"
-                + "    ORDER BY jumlah_transaksi DESC\n"
+                + "    ORDER BY jml DESC\n"
                 + "    LIMIT 6\n"
-                + ") AS subquery ON menu.kode_menu = subquery.kode_menu;";
+                + ") AS baru ON m.kode_menu = baru.kode_menu;";
         try {
             st = conn.prepareStatement(sql);
             rs = st.executeQuery();

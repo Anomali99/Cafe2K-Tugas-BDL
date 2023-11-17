@@ -67,7 +67,7 @@ public class DaoPembelian implements ServisPembelian {
                 }
             }
         }
-        if (mod.getDetail().isEmpty()) {
+        if (!mod.getDetail().isEmpty()) {
             tambahDetail(mod);
         }
     }
@@ -169,7 +169,7 @@ public class DaoPembelian implements ServisPembelian {
         PreparedStatement st = null;
         List list = new ArrayList();
         ResultSet rs = null;
-        String sql = "SELECT * FROM pembelian WHERE tanggal ILIKE ? ORDER BY no_pembelian";
+        String sql = "SELECT * FROM pembelian WHERE  CAST(tanggal AS text) LIKE ? ORDER BY no_pembelian";
         try {
             st = conn.prepareStatement(sql);
             st.setString(1, "%" + tanggal + "%");
@@ -198,6 +198,81 @@ public class DaoPembelian implements ServisPembelian {
             }
         }
     }
+
+    @Override
+    public List<ModelPembelian> getByPetugas(String nama) {
+        PreparedStatement st = null;
+        List list = new ArrayList();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM pembelian WHERE id_pegawai = ANY( "
+                + "SELECT  id_pegawai FROM pegawai WHERE nama ILIKE ? )"
+                + "ORDER BY no_pembelian";
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, "%" + nama + "%");
+            rs = st.executeQuery();
+            while (rs.next()) {
+                ModelPembelian mod = new ModelPembelian();
+                mod.setNoPembelian(rs.getString("no_pembelian"));
+                mod.setPelanggan(servisPel.getById(rs.getString("id_pelanggan")));
+                mod.setPegawai(servisPet.getById(rs.getString("id_pegawai")));
+                mod.setTotal(rs.getLong("total"));
+                mod.setTgl(rs.getString("tanggal"));
+                mod.setDetail(ambilDetail(mod));
+                list.add(mod);
+            }
+            return list;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException ex) {
+                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<ModelPembelian> getByPelanggan(String nama) {
+        PreparedStatement st = null;
+        List list = new ArrayList();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM pembelian WHERE id_pelanggan = ANY( "
+                + "SELECT  id_pelanggan FROM pelanggan WHERE nama ILIKE ? )"
+                + "ORDER BY no_pembelian";
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, "%" + nama + "%");
+            rs = st.executeQuery();
+            while (rs.next()) {
+                ModelPembelian mod = new ModelPembelian();
+                mod.setNoPembelian(rs.getString("no_pembelian"));
+                mod.setPelanggan(servisPel.getById(rs.getString("id_pelanggan")));
+                mod.setPegawai(servisPet.getById(rs.getString("id_pegawai")));
+                mod.setTotal(rs.getLong("total"));
+                mod.setTgl(rs.getString("tanggal"));
+                mod.setDetail(ambilDetail(mod));
+                list.add(mod);
+            }
+            return list;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException ex) {
+                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
 
     @Override
     public ModelPembelian getByNo(String no) {
@@ -336,5 +411,4 @@ public class DaoPembelian implements ServisPembelian {
             }
         }
     }
-
 }
