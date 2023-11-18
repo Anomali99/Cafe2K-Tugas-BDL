@@ -5,6 +5,7 @@
 package view;
 
 import dao.DaoMenu;
+import dao.DaoPelanggan;
 import dao.DaoPembelian;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -32,7 +33,7 @@ public class TambahPembelian extends javax.swing.JPanel {
      */
     private JPanel pn;
     private ModelMenu modM = new ModelMenu();
-    private ModelPelanggan modP = new ModelPelanggan();
+    private ModelPelanggan modP = new DaoPelanggan().getById("P000000001");
     private ServisPembelian servis = new DaoPembelian();
     private ServisMenu servisM = new DaoMenu();
 
@@ -41,6 +42,8 @@ public class TambahPembelian extends javax.swing.JPanel {
         this.pn = pn;
         Date now = new Date();
         SimpleDateFormat nonformat = new SimpleDateFormat("dd-MM-yyyy");
+        tfNama.setText(modP.getNama());
+        tfId.setText(modP.getId());
         tfTgl.setText(nonformat.format(now));
         tfNo.setText(servis.getNomer());
         resetTable();

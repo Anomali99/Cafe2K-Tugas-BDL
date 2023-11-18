@@ -242,51 +242,51 @@ public class MenuSupply extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblConten1);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(79, 42, 24));
         jLabel12.setText("Tanggal :");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(79, 42, 24));
         jLabel14.setText("Total   : ");
 
-        lbTgl.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbTgl.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbTgl.setForeground(new java.awt.Color(79, 42, 24));
         lbTgl.setText("Tanggal ");
 
-        lbTotal.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        lbTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lbTotal.setForeground(new java.awt.Color(79, 42, 24));
         lbTotal.setText("Total   ");
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(79, 42, 24));
         jLabel16.setText("ID Supplier         :");
 
-        lbIdPel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbIdPel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbIdPel.setForeground(new java.awt.Color(79, 42, 24));
         lbIdPel.setText("Tanggal ");
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(79, 42, 24));
         jLabel18.setText("Nama supplier    :");
 
-        lbNamaPel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbNamaPel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbNamaPel.setForeground(new java.awt.Color(79, 42, 24));
         lbNamaPel.setText("Tanggal ");
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(79, 42, 24));
         jLabel20.setText("ID Pegawai      :");
 
-        lbIdPet.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbIdPet.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbIdPet.setForeground(new java.awt.Color(79, 42, 24));
         lbIdPet.setText("Tanggal ");
 
-        jLabel22.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(79, 42, 24));
         jLabel22.setText("Nama Pegawai :");
 
-        lbNamaPet.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbNamaPet.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbNamaPet.setForeground(new java.awt.Color(79, 42, 24));
         lbNamaPet.setText("Tanggal ");
 
@@ -383,11 +383,11 @@ public class MenuSupply extends javax.swing.JPanel {
                             .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbNamaPel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbNamaPet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lbNamaPet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

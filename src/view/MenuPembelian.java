@@ -242,51 +242,51 @@ public class MenuPembelian extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblConten1);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(79, 42, 24));
         jLabel12.setText("Tanggal :");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(79, 42, 24));
         jLabel14.setText("Total   : ");
 
-        lbTgl.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbTgl.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbTgl.setForeground(new java.awt.Color(79, 42, 24));
         lbTgl.setText("Tanggal ");
 
-        lbTotal.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        lbTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lbTotal.setForeground(new java.awt.Color(79, 42, 24));
         lbTotal.setText("Total   ");
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(79, 42, 24));
         jLabel16.setText("ID Pelanggan      :");
 
-        lbIdPel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbIdPel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbIdPel.setForeground(new java.awt.Color(79, 42, 24));
         lbIdPel.setText("Tanggal ");
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(79, 42, 24));
         jLabel18.setText("Nama Pelanggan :");
 
-        lbNamaPel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbNamaPel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbNamaPel.setForeground(new java.awt.Color(79, 42, 24));
         lbNamaPel.setText("Tanggal ");
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(79, 42, 24));
         jLabel20.setText("ID Pegawai      :");
 
-        lbIdPet.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbIdPet.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbIdPet.setForeground(new java.awt.Color(79, 42, 24));
         lbIdPet.setText("Tanggal ");
 
-        jLabel22.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(79, 42, 24));
         jLabel22.setText("Nama Pegawai :");
 
-        lbNamaPet.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lbNamaPet.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbNamaPet.setForeground(new java.awt.Color(79, 42, 24));
         lbNamaPet.setText("Tanggal ");
 

@@ -72,7 +72,7 @@ KODE_MENU
 create table DETAIL_PEMBELIAN (
    KODE_MENU            CHAR(5)              not null,
    ID_PEGAWAI           CHAR(5)              not null,
-   ID_PELANGGAN         VARCHAR(10)          not null,
+   ID_PELANGGAN         CHAR(10)             not null,
    NO_PEMBELIAN         CHAR(10)             not null,
    JUMLAH               INT4                 null,
    SUBTOTAL             INT8                 null,
@@ -111,7 +111,7 @@ KODE_MENU
 /*==============================================================*/
 create table DETAIL_SUPPLY (
    KODE_BAHAN           CHAR(5)              not null,
-   ID_SUPPLIER          VARCHAR(10)          not null,
+   ID_SUPPLIER          CHAR(10)             not null,
    ID_PEGAWAI           CHAR(5)              not null,
    NO_SUPPLY            CHAR(10)             not null,
    JUMLAH               INT4                 null,
@@ -144,6 +144,41 @@ NO_SUPPLY
 /*==============================================================*/
 create  index MEMILIKI8_FK on DETAIL_SUPPLY (
 KODE_BAHAN
+);
+
+/*==============================================================*/
+/* Table: MEMASAK                                               */
+/*==============================================================*/
+create table MEMASAK (
+   ID_PEGAWAI           CHAR(5)              not null,
+   KODE_MENU            CHAR(5)              not null,
+   TANGGAL              DATE                 null,
+   KETERANGAN           VARCHAR(100)         null,
+   NO_MASAK             CHAR(10)             not null,
+   constraint PK_MEMASAK primary key (ID_PEGAWAI, KODE_MENU, NO_MASAK)
+);
+
+/*==============================================================*/
+/* Index: MEMASAK_PK                                            */
+/*==============================================================*/
+create unique index MEMASAK_PK on MEMASAK (
+ID_PEGAWAI,
+KODE_MENU,
+NO_MASAK
+);
+
+/*==============================================================*/
+/* Index: MELAKUKAN_FK                                          */
+/*==============================================================*/
+create  index MELAKUKAN_FK on MEMASAK (
+ID_PEGAWAI
+);
+
+/*==============================================================*/
+/* Index: MEMILIKI_FK                                           */
+/*==============================================================*/
+create  index MEMILIKI_FK on MEMASAK (
+KODE_MENU
 );
 
 /*==============================================================*/
@@ -191,7 +226,7 @@ ID_PEGAWAI
 /* Table: PELANGGAN                                             */
 /*==============================================================*/
 create table PELANGGAN (
-   ID_PELANGGAN         VARCHAR(10)          not null,
+   ID_PELANGGAN         CHAR(10)             not null,
    NAMA                 VARCHAR(30)          null,
    ALAMAT               VARCHAR(100)         null,
    TELEPHONE            VARCHAR(13)          null,
@@ -210,7 +245,7 @@ ID_PELANGGAN
 /*==============================================================*/
 create table PEMBELIAN (
    ID_PEGAWAI           CHAR(5)              not null,
-   ID_PELANGGAN         VARCHAR(10)          not null,
+   ID_PELANGGAN         CHAR(10)             not null,
    NO_PEMBELIAN         CHAR(10)             not null,
    TANGGAL              DATE                 null,
    TOTAL                INT8                 null,
@@ -244,7 +279,7 @@ ID_PEGAWAI
 /* Table: SUPPLIER                                              */
 /*==============================================================*/
 create table SUPPLIER (
-   ID_SUPPLIER          VARCHAR(10)          not null,
+   ID_SUPPLIER          CHAR(10)             not null,
    NAMA                 VARCHAR(30)          null,
    ALAMAT               VARCHAR(100)         null,
    TELEPHONE            VARCHAR(13)          null,
@@ -262,7 +297,7 @@ ID_SUPPLIER
 /* Table: SUPPLY                                                */
 /*==============================================================*/
 create table SUPPLY (
-   ID_SUPPLIER          VARCHAR(10)          not null,
+   ID_SUPPLIER          CHAR(10)             not null,
    ID_PEGAWAI           CHAR(5)              not null,
    NO_SUPPLY            CHAR(10)             not null,
    TANGGAL              DATE                 null,
@@ -323,6 +358,16 @@ alter table DETAIL_SUPPLY
       references BAHAN (KODE_BAHAN)
       on delete restrict on update restrict;
 
+alter table MEMASAK
+   add constraint FK_MEMASAK_MELAKUKAN_PEGAWAI foreign key (ID_PEGAWAI)
+      references PEGAWAI (ID_PEGAWAI)
+      on delete restrict on update restrict;
+
+alter table MEMASAK
+   add constraint FK_MEMASAK_MEMILIKI_MENU foreign key (KODE_MENU)
+      references MENU (KODE_MENU)
+      on delete restrict on update restrict;
+
 alter table PEMBELIAN
    add constraint FK_PEMBELIA_MELAKUKAN_PELANGGA foreign key (ID_PELANGGAN)
       references PELANGGAN (ID_PELANGGAN)
@@ -342,6 +387,50 @@ alter table SUPPLY
    add constraint FK_SUPPLY_MEMASOK_SUPPLIER foreign key (ID_SUPPLIER)
       references SUPPLIER (ID_SUPPLIER)
       on delete restrict on update restrict;
+
+INSERT INTO pegawai (
+	id_pegawai, 
+	nama, 
+	alamat, 
+	telephone, 
+	email, 
+	level, 
+	username, 
+	password
+) VALUES (
+	'PT001',
+	'Admin',
+	'-',
+	'0',
+	'fatiq5127@gmail.com',
+	'Admin',
+	'admin',
+	'21232f297a57a5a743894a0e4a801fc3'
+);
+
+INSERT INTO supplier (
+	id_supplier, 
+	nama, 
+	alamat, 
+	telephone
+) VALUES (
+	'S000000001',
+	'Tidak diketahui',
+	'-',
+	'0'
+);
+
+INSERT INTO pelanggan (
+	id_pelanggan, 
+	nama, 
+	alamat, 
+	telephone
+) VALUES (
+	'P000000001',
+	'Tidak diketahui',
+	'-',
+	'0'
+);
 ```
 
 

@@ -28,16 +28,17 @@ public class MenuUtama extends javax.swing.JFrame {
     public MenuUtama() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        ModelPegawai mod = servis.getById("PT001");
-        this.mod = mod;
+        this.mod = servis.getById("PT001");
         setEvent();
         btn_dasbor.tekan();
     }
+
     public MenuUtama(ModelPegawai mod) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.mod = mod;
         setEvent();
+        setLevel();
         btn_dasbor.tekan();
     }
 
@@ -289,7 +290,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_petugas.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuDasbor());
                 pn_main.repaint();
@@ -308,7 +309,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_petugas.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuMenu());
                 pn_main.repaint();
@@ -327,7 +328,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_petugas.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuBahan());
                 pn_main.repaint();
@@ -346,7 +347,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_petugas.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuPembelian(pn_main));
                 pn_main.repaint();
@@ -365,7 +366,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_petugas.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuSupply(pn_main));
                 pn_main.repaint();
@@ -384,7 +385,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_petugas.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuSupplier());
                 pn_main.repaint();
@@ -403,7 +404,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_petugas.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuPelanggan());
                 pn_main.repaint();
@@ -422,7 +423,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_pelanggan.reset();
                 btn_memasak.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuPetugas(pn_main));
                 pn_main.repaint();
@@ -441,7 +442,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_pelanggan.reset();
                 btn_petugas.reset();
                 btn_laporan.reset();
-                
+
                 pn_main.removeAll();
                 pn_main.add(new MenuMasak());
                 pn_main.repaint();
@@ -460,12 +461,37 @@ public class MenuUtama extends javax.swing.JFrame {
                 btn_supplier.reset();
                 btn_pelanggan.reset();
                 btn_memasak.reset();
-                
+
                 pn_main.removeAll();
 //                pn_main.add(new MenuPetugas(pn_main));
                 pn_main.repaint();
                 pn_main.revalidate();
             }
         });
+    }
+
+    private void setLevel() {
+        switch (mod.getLevel()) {
+            case "Kasir":
+                btn_bahan.setVisible(false);
+                btn_supply.setVisible(false);
+                btn_supplier.setVisible(false);
+                btn_memasak.setVisible(false);
+                break;
+            case "Koki":
+                btn_pembelian.setVisible(false);
+                btn_supply.setVisible(false);
+                btn_supplier.setVisible(false);
+                btn_pelanggan.setVisible(false);
+                break;
+            case "Gudang":
+                btn_menu.setVisible(false);
+                btn_pembelian.setVisible(false);
+                btn_pelanggan.setVisible(false);
+                btn_memasak.setVisible(false);
+                break;
+        }
+        btn_petugas.setVisible(false);
+        btn_laporan.setVisible(false);
     }
 }

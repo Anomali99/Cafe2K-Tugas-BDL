@@ -5,7 +5,7 @@
 package view;
 
 import dao.DaoBahan;
-import dao.DaoPembelian;
+import dao.DaoSupplier;
 import dao.DaoSupply;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -17,8 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.ModelBahan;
 import model.ModelDetailS;
-import model.ModelMenu;
-import model.ModelPelanggan;
 import model.ModelSupplier;
 import model.ModelSupply;
 import servis.ServisBahan;
@@ -35,7 +33,7 @@ public class TambahSupply extends javax.swing.JPanel {
      */
     private JPanel pn;
     private ModelBahan modB = new ModelBahan();
-    private ModelSupplier modS = new ModelSupplier();
+    private ModelSupplier modS = new DaoSupplier().getById("S000000001");
     private ServisSupply servis = new DaoSupply();
     private ServisBahan servisB = new DaoBahan();
 
@@ -44,6 +42,8 @@ public class TambahSupply extends javax.swing.JPanel {
         this.pn = pn;
         Date now = new Date();
         SimpleDateFormat nonformat = new SimpleDateFormat("dd-MM-yyyy");
+        tfNama.setText(modS.getNama());
+        tfId.setText(modS.getId());
         tfTgl.setText(nonformat.format(now));
         tfNo.setText(servis.getNomer());
         resetTable();

@@ -320,7 +320,7 @@ public class DaoSupply implements ServisSupply {
         String no = nonformat.format(now);
         String sql = "SELECT RIGHT (no_supply, 3) AS nomor "
                 + "FROM supply "
-                + "WHERE no_supply LIKE 'S%' "
+                + "WHERE no_supply LIKE 'R%' "
                 + "ORDER BY no_supply DESC LIMIT 1";
 
         try {
@@ -329,9 +329,9 @@ public class DaoSupply implements ServisSupply {
             if (rs.next()) {
                 int nomor1 = Integer.parseInt(rs.getString("nomor"));
                 nomor1++;
-                urutan = "S" + no + String.format("%03d", nomor1);
+                urutan = "R" + no + String.format("%03d", nomor1);
             } else {
-                urutan = "S"+no+"001";
+                urutan = "R"+no+"001";
             }
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
