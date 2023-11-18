@@ -128,4 +128,13 @@ public class ModelMenu {
         }
         return s;
     }
+    
+    public boolean isKurang(){
+        boolean b = false;
+        for(int i = 0; i < bahan.size(); i++){
+            if(bahan.get(i).getStok()<jmlBahan.get(i))
+                b = true;
+        }
+        return b;
+    }
 }

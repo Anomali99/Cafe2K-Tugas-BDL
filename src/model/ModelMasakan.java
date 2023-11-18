@@ -9,6 +9,7 @@ package model;
  * @author fatiq
  */
 public class ModelMasakan {
+    private String noMasak;
     private ModelPegawai pegawai;
     private ModelMenu menu;
     private String tgl;
@@ -68,6 +69,20 @@ public class ModelMasakan {
      */
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
+    }
+
+    /**
+     * @return the noMasak
+     */
+    public String getNoMasak() {
+        return noMasak;
+    }
+
+    /**
+     * @param noMasak the noMasak to set
+     */
+    public void setNoMasak(String noMasak) {
+        this.noMasak = noMasak;
     }
     
 }

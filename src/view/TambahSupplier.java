@@ -191,6 +191,11 @@ public class TambahSupplier extends javax.swing.JDialog {
 
         tfTlp.setForeground(new java.awt.Color(79, 42, 24));
         tfTlp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfTlp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTlpKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(79, 42, 24));
@@ -332,6 +337,12 @@ public class TambahSupplier extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_btnSimpanMouseClicked
+
+    private void tfTlpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTlpKeyTyped
+        char a = evt.getKeyChar();
+        if(!Character.isDigit(a)||tfTlp.getText().length()>12)
+            evt.consume();
+    }//GEN-LAST:event_tfTlpKeyTyped
 
     /**
      * @param args the command line arguments

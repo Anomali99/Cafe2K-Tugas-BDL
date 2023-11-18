@@ -340,7 +340,7 @@ public class TambahPelanggan extends javax.swing.JDialog {
 
     private void tfTlpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTlpKeyTyped
         char a = evt.getKeyChar();
-        if (!Character.isDigit(a))
+        if (!Character.isDigit(a)||tfTlp.getText().length()>12)
             evt.consume();
     }//GEN-LAST:event_tfTlpKeyTyped
 

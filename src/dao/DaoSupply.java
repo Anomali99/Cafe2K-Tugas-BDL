@@ -116,14 +116,14 @@ public class DaoSupply implements ServisSupply {
             }
             return list;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } finally {
             if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -151,14 +151,14 @@ public class DaoSupply implements ServisSupply {
             }
             return list;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } finally {
             if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -186,14 +186,14 @@ public class DaoSupply implements ServisSupply {
             }
             return list;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } finally {
             if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -223,14 +223,14 @@ public class DaoSupply implements ServisSupply {
             }
             return list;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } finally {
             if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -260,14 +260,14 @@ public class DaoSupply implements ServisSupply {
             }
             return list;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } finally {
             if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -296,14 +296,14 @@ public class DaoSupply implements ServisSupply {
             }
             return mod;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } finally {
             if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -320,7 +320,7 @@ public class DaoSupply implements ServisSupply {
         String no = nonformat.format(now);
         String sql = "SELECT RIGHT (no_supply, 3) AS nomor "
                 + "FROM supply "
-                + "WHERE no_supply LIKE 'T%' "
+                + "WHERE no_supply LIKE 'S%' "
                 + "ORDER BY no_supply DESC LIMIT 1";
 
         try {
@@ -351,7 +351,8 @@ public class DaoSupply implements ServisSupply {
         PreparedStatement st = null;
         String sql = "INSERT INTO detail_supply "
                 + "(no_supply, id_supplier, id_pegawai, kode_bahan, jumlah, subtotal, keterangan) "
-                + "VALUES (?,?,?,?,?,?,?)";
+                + "VALUES (?,?,?,?,?,?,?); "
+                + "UPDATE bahan SET stok = stok + ? WHERE kode_bahan = ?;";
         try {
             for (ModelDetailS p : mod.getDetail()) {
                 st = conn.prepareStatement(sql);
@@ -362,6 +363,8 @@ public class DaoSupply implements ServisSupply {
                 st.setInt(5, p.getJml());
                 st.setLong(6, p.getSubtotal());
                 st.setString(7, p.getKeterangan());
+                st.setInt(8, p.getJml());
+                st.setString(9, p.getBahan().getKode());
                 st.executeUpdate();
             }
         } catch (SQLException ex) {
@@ -399,14 +402,14 @@ public class DaoSupply implements ServisSupply {
             }
             return list;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } finally {
             if (st != null) {
                 try {
                     st.close();
                 } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(DaoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(DaoSupply.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

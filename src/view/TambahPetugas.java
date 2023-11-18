@@ -173,6 +173,11 @@ public class TambahPetugas extends javax.swing.JPanel {
         tfTlp.setForeground(new java.awt.Color(79, 42, 24));
         tfTlp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfTlp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfTlp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTlpKeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(79, 42, 24));
@@ -488,6 +493,12 @@ public class TambahPetugas extends javax.swing.JPanel {
         hide.setVisible(true);
         unhide.setVisible(false);
     }//GEN-LAST:event_unhideMouseClicked
+
+    private void tfTlpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTlpKeyTyped
+        char a = evt.getKeyChar();
+        if(!Character.isDigit(a)||tfTlp.getText().length()>12)
+            evt.consume();
+    }//GEN-LAST:event_tfTlpKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

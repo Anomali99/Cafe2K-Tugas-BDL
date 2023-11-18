@@ -554,9 +554,12 @@ public class TambahMenu extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         PilihBahan dj = new PilihBahan(null, true);
         dj.setVisible(true);
-        tfKodeBahan.setText(dj.mod.getKode());
-        tfNamaBahan.setText(dj.mod.getNama());
-        tfJmlBahan.setText("0");
+        try {
+            tfKodeBahan.setText(dj.mod.getKode());
+            tfNamaBahan.setText(dj.mod.getNama());
+            tfJmlBahan.setText("0");
+        } catch (NullPointerException e) {
+        }
         jLabel1.requestFocus();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -680,10 +683,10 @@ public class TambahMenu extends javax.swing.JDialog {
         if (tfKodeBahan.getText().equals("")) {
             valid = false;
             JOptionPane.showMessageDialog(this, "Masukkan bahan terlebih dahulu");
-        } else if (tfJmlBahan.getText().equals("")||tfJmlBahan.getText().equals("0")) {
+        } else if (tfJmlBahan.getText().equals("") || tfJmlBahan.getText().equals("0")) {
             valid = false;
             JOptionPane.showMessageDialog(this, "Masukkan jumlah bahan terlebih dahulu");
-        } 
+        }
         return valid;
     }
 }

@@ -762,19 +762,25 @@ public class TambahSupply extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         PilihSupplier pn = new PilihSupplier(null, true);
         pn.setVisible(true);
-        this.modS = pn.mod;
-        tfId.setText(modS.getId());
-        tfNama.setText(modS.getNama());
+        try {
+            this.modS = pn.mod;
+            tfId.setText(modS.getId());
+            tfNama.setText(modS.getNama());
+        } catch (NullPointerException e) {
+        }
         jLabel1.requestFocus();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         PilihBahan pn = new PilihBahan(null, true);
         pn.setVisible(true);
-        this.modB = pn.mod;
-        tfKode.setText(modB.getKode());
-        tfNamaMenu.setText(modB.getNama());
-        tfHarga.setText(String.valueOf(modB.getHarga()));
+        try {
+            this.modB = pn.mod;
+            tfKode.setText(modB.getKode());
+            tfNamaMenu.setText(modB.getNama());
+            tfHarga.setText(String.valueOf(modB.getHarga()));
+        } catch (NullPointerException e) {
+        }
         jLabel1.requestFocus();
     }//GEN-LAST:event_jButton5ActionPerformed
 

@@ -351,7 +351,8 @@ public class DaoPembelian implements ServisPembelian {
         PreparedStatement st = null;
         String sql = "INSERT INTO detail_pembelian "
                 + "(no_pembelian, id_pelanggan, id_pegawai, kode_menu, jumlah, subtotal, keterangan) "
-                + "VALUES (?,?,?,?,?,?,?)";
+                + "VALUES (?,?,?,?,?,?,?); "
+                + "UPDATE menu SET stok = stok - ? WHERE kode_menu = ?; ";
         try {
             for (ModelDetailP p : mod.getDetail()) {
                 st = conn.prepareStatement(sql);
@@ -362,6 +363,8 @@ public class DaoPembelian implements ServisPembelian {
                 st.setInt(5, p.getJml());
                 st.setLong(6, p.getSubtotal());
                 st.setString(7, p.getKeterangan());
+                st.setInt(8, p.getJml());
+                st.setString(9, p.getMenu().getKode());
                 st.executeUpdate();
             }
         } catch (SQLException ex) {

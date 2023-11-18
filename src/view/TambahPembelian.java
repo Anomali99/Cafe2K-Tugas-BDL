@@ -759,19 +759,25 @@ public class TambahPembelian extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         PilihPelanggan pn = new PilihPelanggan(null, true);
         pn.setVisible(true);
-        this.modP = pn.mod;
-        tfId.setText(modP.getId());
-        tfNama.setText(modP.getNama());
+        try {
+            this.modP = pn.mod;
+            tfId.setText(modP.getId());
+            tfNama.setText(modP.getNama());
+        } catch (NullPointerException e) {
+        }
         jLabel1.requestFocus();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         PilihMenu pn = new PilihMenu(null, true);
         pn.setVisible(true);
-        this.modM = pn.mod;
-        tfKode.setText(modM.getKode());
-        tfNamaMenu.setText(modM.getNama());
-        tfHarga.setText(String.valueOf(modM.getHarga()));
+        try {
+            this.modM = pn.mod;
+            tfKode.setText(modM.getKode());
+            tfNamaMenu.setText(modM.getNama());
+            tfHarga.setText(String.valueOf(modM.getHarga()));
+        } catch (NullPointerException e) {
+        }
         jLabel1.requestFocus();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -954,6 +960,9 @@ public class TambahPembelian extends javax.swing.JPanel {
         } else if (tfJml.getText().equals("") || tfJml.getText().equals("0")) {
             valid = false;
             JOptionPane.showMessageDialog(this, "Masukkan jumlah pesanan terlebih dahulu");
+        }else if (Integer.parseInt(tfJml.getText())>modM.getStok()) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Stok Menu kurang dari "+tfJml.getText());
         }
         return valid;
     }
