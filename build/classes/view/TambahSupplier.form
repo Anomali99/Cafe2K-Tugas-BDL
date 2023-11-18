@@ -262,7 +262,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="2a" red="4f" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="ID Pelanggan"/>
+                <Property name="text" type="java.lang.String" value="ID Supplier"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfNama">

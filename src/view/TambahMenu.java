@@ -26,7 +26,7 @@ public class TambahMenu extends javax.swing.JDialog {
     int xx, xy;
     private ServisMenu servis = new DaoMenu();
     private ModelMenu mod = new ModelMenu();
-    
+
     public TambahMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -34,10 +34,10 @@ public class TambahMenu extends javax.swing.JDialog {
         tfId.setText(servis.getNomer());
         tfStok.setText("0");
         tfJmlBahan.setText("0");
-        tfJmlBahan.setText("0");
+        tfJmlMenu.setText("0");
         jLabel1.requestFocus();
     }
-    
+
     public TambahMenu(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
@@ -49,7 +49,7 @@ public class TambahMenu extends javax.swing.JDialog {
         tfStok.setText(String.valueOf(mod.getStok()));
         tfJmlMenu.setText(String.valueOf(mod.getJmlMenu()));
         DefaultTableModel tbl = (DefaultTableModel) tblBahan.getModel();
-        for(int i = 0; i < mod.getBahan().size(); i++){
+        for (int i = 0; i < mod.getBahan().size(); i++) {
             Object[] ob = new Object[3];
             ob[0] = mod.getBahan().get(i).getKode();
             ob[1] = mod.getBahan().get(i).getNama();
@@ -233,6 +233,11 @@ public class TambahMenu extends javax.swing.JDialog {
 
         tfHarga.setForeground(new java.awt.Color(79, 42, 24));
         tfHarga.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfHargaKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(79, 42, 24));
@@ -266,6 +271,11 @@ public class TambahMenu extends javax.swing.JDialog {
         tfJmlMenu.setForeground(new java.awt.Color(79, 42, 24));
         tfJmlMenu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfJmlMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfJmlMenu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfJmlMenuKeyTyped(evt);
+            }
+        });
 
         tfKodeBahan.setEditable(false);
         tfKodeBahan.setForeground(new java.awt.Color(79, 42, 24));
@@ -288,6 +298,11 @@ public class TambahMenu extends javax.swing.JDialog {
         tfJmlBahan.setForeground(new java.awt.Color(79, 42, 24));
         tfJmlBahan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfJmlBahan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfJmlBahan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfJmlBahanKeyTyped(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(79, 42, 24));
@@ -482,49 +497,54 @@ public class TambahMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
-        mod.setKode(tfId.getText());
-        mod.setNama(tfNama.getText());
-        mod.setStok(Integer.parseInt(tfStok.getText()));
-        mod.setHarga(Long.parseLong(tfHarga.getText()));
-        mod.setJmlMenu(Integer.parseInt(tfJmlMenu.getText()));
-        List<ModelBahan> bahan = new ArrayList();
-        List<Integer> jml = new ArrayList();
-        DefaultTableModel tbl = (DefaultTableModel) tblBahan.getModel();                                      
-        int index = tbl.getRowCount()-1; 
-        for(int i = 0; i<= index; i++){
-            ModelBahan bn = new ModelBahan();
-            bn.setKode(tbl.getValueAt(i, 0).toString());
-            bahan.add(bn);
-            jml.add(Integer.parseInt(tbl.getValueAt(i, 2).toString()));
+        if (validData()) {
+            mod.setKode(tfId.getText());
+            mod.setNama(tfNama.getText());
+            mod.setStok(Integer.parseInt(tfStok.getText()));
+            mod.setHarga(Long.parseLong(tfHarga.getText()));
+            mod.setJmlMenu(Integer.parseInt(tfJmlMenu.getText()));
+            List<ModelBahan> bahan = new ArrayList();
+            List<Integer> jml = new ArrayList();
+            DefaultTableModel tbl = (DefaultTableModel) tblBahan.getModel();
+            int index = tbl.getRowCount() - 1;
+            for (int i = 0; i <= index; i++) {
+                ModelBahan bn = new ModelBahan();
+                bn.setKode(tbl.getValueAt(i, 0).toString());
+                bahan.add(bn);
+                jml.add(Integer.parseInt(tbl.getValueAt(i, 2).toString()));
+            }
+            mod.setBahan(bahan);
+            mod.setJmlBahan(jml);
+            if (jLabel1.getText().equals("Tambah Data Menu")) {
+                servis.tambahData(mod);
+            } else {
+                servis.ubahData(mod);
+            }
+            dispose();
         }
-        mod.setBahan(bahan);
-        mod.setJmlBahan(jml);
-        if (jLabel1.getText().equals("Tambah Data Menu"))
-            servis.tambahData(mod);
-        else
-            servis.ubahData(mod);
-        dispose();
     }//GEN-LAST:event_btnSimpanMouseClicked
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        DefaultTableModel tbl = (DefaultTableModel) tblBahan.getModel();
-        String kodeBahan = tfKodeBahan.getText();
-        String namaBahan = tfNamaBahan.getText();
-        String jmlBahan = tfJmlBahan.getText();
-        tbl.addRow(new Object[]{kodeBahan,namaBahan,jmlBahan});
-        tblBahan.setModel(tbl);
-        tfKodeBahan.setText("");
-        tfNamaBahan.setText("");
-        tfJmlBahan.setText("");
-        jLabel1.requestFocus();
+        if (bahanValiad()) {
+            DefaultTableModel tbl = (DefaultTableModel) tblBahan.getModel();
+            String kodeBahan = tfKodeBahan.getText();
+            String namaBahan = tfNamaBahan.getText();
+            String jmlBahan = tfJmlBahan.getText();
+            tbl.addRow(new Object[]{kodeBahan, namaBahan, jmlBahan});
+            tblBahan.setModel(tbl);
+            tfKodeBahan.setText("");
+            tfNamaBahan.setText("");
+            tfJmlBahan.setText("");
+            jLabel1.requestFocus();
+        }
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        DefaultTableModel tbl = (DefaultTableModel) tblBahan.getModel();                                        
+        DefaultTableModel tbl = (DefaultTableModel) tblBahan.getModel();
         int index = tblBahan.getSelectedRow();
         try {
             tbl.removeRow(index);
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Pilih baris yang ingin dihapus");
         }
         tblBahan.setModel(tbl);
@@ -532,13 +552,31 @@ public class TambahMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PilihBahan dj = new PilihBahan(null,true);
+        PilihBahan dj = new PilihBahan(null, true);
         dj.setVisible(true);
-        tfKodeBahan.setText(dj.kode);
-        tfNamaBahan.setText(dj.nama);
+        tfKodeBahan.setText(dj.mod.getKode());
+        tfNamaBahan.setText(dj.mod.getNama());
         tfJmlBahan.setText("0");
         jLabel1.requestFocus();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tfHargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHargaKeyTyped
+        char a = evt.getKeyChar();
+        if (!Character.isDigit(a))
+            evt.consume();
+    }//GEN-LAST:event_tfHargaKeyTyped
+
+    private void tfJmlMenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfJmlMenuKeyTyped
+        char a = evt.getKeyChar();
+        if (!Character.isDigit(a))
+            evt.consume();
+    }//GEN-LAST:event_tfJmlMenuKeyTyped
+
+    private void tfJmlBahanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfJmlBahanKeyTyped
+        char a = evt.getKeyChar();
+        if (!Character.isDigit(a))
+            evt.consume();
+    }//GEN-LAST:event_tfJmlBahanKeyTyped
 
     /**
      * @param args the command line arguments
@@ -618,4 +656,34 @@ public class TambahMenu extends javax.swing.JDialog {
     private javax.swing.JTextField tfNamaBahan;
     private javax.swing.JTextField tfStok;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validData() {
+        boolean valid = true;
+        if (tfNama.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nama terlebih dahulu");
+        } else if (tfHarga.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan harga terlebih dahulu");
+        } else if (tfJmlMenu.getText().equals("") || tfJmlMenu.getText().equals("0")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan jumlah menu terlebih dahulu");
+        } else if (tblBahan.getRowCount() == 0) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan bahan baku terlebih dahulu");
+        }
+        return valid;
+    }
+
+    private boolean bahanValiad() {
+        boolean valid = true;
+        if (tfKodeBahan.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan bahan terlebih dahulu");
+        } else if (tfJmlBahan.getText().equals("")||tfJmlBahan.getText().equals("0")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan jumlah bahan terlebih dahulu");
+        } 
+        return valid;
+    }
 }

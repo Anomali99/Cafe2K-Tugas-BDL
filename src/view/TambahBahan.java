@@ -6,6 +6,7 @@ package view;
 
 import dao.DaoBahan;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import model.ModelBahan;
 import servis.ServisBahan;
 
@@ -21,7 +22,7 @@ public class TambahBahan extends javax.swing.JDialog {
     int xx, xy;
     private ServisBahan servis = new DaoBahan();
     private ModelBahan mod = new ModelBahan();
-    
+
     public TambahBahan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -30,7 +31,7 @@ public class TambahBahan extends javax.swing.JDialog {
         tfStok.setText("0");
         jLabel1.requestFocus();
     }
-    
+
     public TambahBahan(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
@@ -200,6 +201,11 @@ public class TambahBahan extends javax.swing.JDialog {
 
         tfHarga.setForeground(new java.awt.Color(79, 42, 24));
         tfHarga.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfHargaKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(79, 42, 24));
@@ -321,16 +327,25 @@ public class TambahBahan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
-        mod.setKode(tfId.getText());
-        mod.setNama(tfNama.getText());
-        mod.setStok(Integer.parseInt(tfStok.getText()));
-        mod.setHarga(Long.parseLong(tfHarga.getText()));
-        if (jLabel1.getText().equals("Tambah Data Bahan"))
-            servis.tambahData(mod);
-        else
-            servis.ubahData(mod);
-        dispose();
+        if (inputValid()) {
+            mod.setKode(tfId.getText());
+            mod.setNama(tfNama.getText());
+            mod.setStok(Integer.parseInt(tfStok.getText()));
+            mod.setHarga(Long.parseLong(tfHarga.getText()));
+            if (jLabel1.getText().equals("Tambah Data Bahan")) {
+                servis.tambahData(mod);
+            } else {
+                servis.ubahData(mod);
+            }
+            dispose();
+        }
     }//GEN-LAST:event_btnSimpanMouseClicked
+
+    private void tfHargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHargaKeyTyped
+        char a = evt.getKeyChar();
+        if (!Character.isDigit(a))
+            evt.consume();
+    }//GEN-LAST:event_tfHargaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -392,4 +407,16 @@ public class TambahBahan extends javax.swing.JDialog {
     private javax.swing.JTextField tfNama;
     private javax.swing.JTextField tfStok;
     // End of variables declaration//GEN-END:variables
+
+    private boolean inputValid() {
+        boolean valid = true;
+        if(tfNama.getText().equals("")){
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nama terlebih dahulu");
+        }else if(tfHarga.getText().equals("")){
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan harga terlebih dahulu");
+        }
+        return valid;
+    }
 }

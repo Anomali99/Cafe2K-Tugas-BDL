@@ -8,6 +8,7 @@ import dao.DaoBahan;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import model.ModelBahan;
 import servis.ServisBahan;
 import tabel.TabelBahan;
 
@@ -23,8 +24,7 @@ public class PilihBahan extends javax.swing.JDialog {
     int xx, xy;
     private final TabelBahan tbl = new TabelBahan();
     private ServisBahan servis = new DaoBahan();
-    public String kode = "";
-    public String nama = "";
+    public ModelBahan mod = new ModelBahan();
     
     public PilihBahan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -282,8 +282,7 @@ public class PilihBahan extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_cariActionPerformed
 
     private void tblContenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContenMouseClicked
-        kode = tblConten.getValueAt(tblConten.getSelectedRow(), 1).toString();
-        nama = tblConten.getValueAt(tblConten.getSelectedRow(), 2).toString();
+        mod = servis.getByKode(tblConten.getValueAt(tblConten.getSelectedRow(), 1).toString());
         dispose();
     }//GEN-LAST:event_tblContenMouseClicked
 

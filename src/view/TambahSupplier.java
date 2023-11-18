@@ -6,6 +6,7 @@ package view;
 
 import dao.DaoSupplier;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import model.ModelSupplier;
 import servis.ServisSupplier;
 
@@ -21,7 +22,7 @@ public class TambahSupplier extends javax.swing.JDialog {
     int xx, xy;
     private ServisSupplier servis = new DaoSupplier();
     private ModelSupplier mod = new ModelSupplier();
-    
+
     public TambahSupplier(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -29,7 +30,7 @@ public class TambahSupplier extends javax.swing.JDialog {
         tfId.setText(servis.getNomer());
         jLabel1.requestFocus();
     }
-    
+
     public TambahSupplier(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
@@ -142,7 +143,7 @@ public class TambahSupplier extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(79, 42, 24));
-        jLabel4.setText("ID Pelanggan");
+        jLabel4.setText("ID Supplier");
 
         tfNama.setForeground(new java.awt.Color(79, 42, 24));
         tfNama.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
@@ -318,15 +319,18 @@ public class TambahSupplier extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
-        mod.setId(tfId.getText());
-        mod.setNama(tfNama.getText());
-        mod.setTlp(tfTlp.getText());
-        mod.setAlamat(tfAlamat.getText());
-        if (jLabel1.getText().equals("Tambah Data Supplier"))
-            servis.tambahData(mod);
-        else
-            servis.ubahData(mod);
-        dispose();
+        if (validData()) {
+            mod.setId(tfId.getText());
+            mod.setNama(tfNama.getText());
+            mod.setTlp(tfTlp.getText());
+            mod.setAlamat(tfAlamat.getText());
+            if (jLabel1.getText().equals("Tambah Data Supplier")) {
+                servis.tambahData(mod);
+            } else {
+                servis.ubahData(mod);
+            }
+            dispose();
+        }
     }//GEN-LAST:event_btnSimpanMouseClicked
 
     /**
@@ -389,4 +393,19 @@ public class TambahSupplier extends javax.swing.JDialog {
     private javax.swing.JTextField tfNama;
     private javax.swing.JTextField tfTlp;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validData() {
+        boolean valid = true;
+        if (tfNama.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nama terlebih dahulu");
+        } else if (tfTlp.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nomor telephone terlebih dahulu");
+        } else if (tfAlamat.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan alamat terlebih dahulu");
+        }
+        return valid;
+    }
 }

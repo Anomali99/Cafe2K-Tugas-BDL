@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.ModelPegawai;
@@ -29,14 +30,16 @@ public class TambahPetugas extends javax.swing.JPanel {
     private JPanel pn;
     private ModelPegawai mod = new ModelPegawai();
     private ServisPetugas servis = new DaoPetugas();
-
+    
     public TambahPetugas(JPanel pn) {
         initComponents();
         this.pn = pn;
         pass.setEchoChar('*');
+        hide.setVisible(false);
+        unhide.setVisible(true);
         tfId.setText(servis.getNomer());
     }
-
+    
     public TambahPetugas(JPanel pn, ModelPegawai mod) {
         initComponents();
         this.pn = pn;
@@ -51,9 +54,9 @@ public class TambahPetugas extends javax.swing.JPanel {
         tfEmail.setEditable(false);
         tfUser.setEditable(false);
         tfTlp.setEditable(false);
-
+        show.setVisible(false);
         jLabel3.setText("Perbarui Data Petugas");
-
+        
         loadData();
     }
 
@@ -91,6 +94,9 @@ public class TambahPetugas extends javax.swing.JPanel {
         btnSimpan = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
+        show = new javax.swing.JPanel();
+        hide = new javax.swing.JLabel();
+        unhide = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -238,6 +244,27 @@ public class TambahPetugas extends javax.swing.JPanel {
         pass.setForeground(new java.awt.Color(79, 42, 24));
         pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
 
+        show.setBackground(new java.awt.Color(255, 255, 255));
+        show.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        hide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/unhide.png"))); // NOI18N
+        hide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hideMouseClicked(evt);
+            }
+        });
+        show.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 20));
+
+        unhide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        unhide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/hide.png"))); // NOI18N
+        unhide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                unhideMouseClicked(evt);
+            }
+        });
+        show.add(unhide, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, -1));
+
         javax.swing.GroupLayout pnTambahLayout = new javax.swing.GroupLayout(pnTambah);
         pnTambah.setLayout(pnTambahLayout);
         pnTambahLayout.setHorizontalGroup(
@@ -273,7 +300,14 @@ public class TambahPetugas extends javax.swing.JPanel {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel9)
-                                                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                    .addGroup(pnTambahLayout.createSequentialGroup()
+                                                        .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(show, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(pnTambahLayout.createSequentialGroup()
+                                        .addComponent(btnBatal)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnSimpan)))
                                 .addGap(30, 30, 30)
                                 .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lbFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,11 +317,7 @@ public class TambahPetugas extends javax.swing.JPanel {
                                         .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(pnTambahLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(jLabel3))
-                            .addGroup(pnTambahLayout.createSequentialGroup()
-                                .addComponent(btnBatal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSimpan)))
+                                .addComponent(jLabel3)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTambahLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -302,6 +332,13 @@ public class TambahPetugas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnTambahLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(lbFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfFoto)
+                            .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnTambahLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -326,32 +363,27 @@ public class TambahPetugas extends javax.swing.JPanel {
                                     .addComponent(tfAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfTlp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnTambahLayout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTambahLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel8)
                                             .addComponent(jLabel9))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnTambahLayout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(show, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnTambahLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(lbFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfFoto)
-                            .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(9, 9, 9)
-                .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBatal)
-                    .addComponent(btnSimpan))
-                .addGap(0, 0, 0)
+                        .addComponent(cbxLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(pnTambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBatal)
+                            .addComponent(btnSimpan))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -403,7 +435,7 @@ public class TambahPetugas extends javax.swing.JPanel {
                 double scaleY = (double) lbH / (double) imgH;
                 double scale = Math.min(scaleX, scaleY);
                 Image scaleImg = imgIcon.getImage().getScaledInstance((int) (scale * imgW), (int) (scale * imgH), Image.SCALE_SMOOTH);
-
+                
                 lbFoto.setIcon(new ImageIcon(scaleImg));
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -421,22 +453,41 @@ public class TambahPetugas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSimpanMouseExited
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        if (jLabel3.getText().equalsIgnoreCase("Perbarui Data Petugas")) {
-            mod.setLevel(cbxLevel.getSelectedItem().toString());
-            servis.ubahData(mod);
-        } else {
-            mod.setId(tfId.getText());
-            mod.setNama(tfNama.getText());
-            mod.setAlamat(tfAlamat.getText());
-            mod.setTlp(tfTlp.getText());
-            mod.setEmail(tfEmail.getText());
-            mod.setUsername(tfUser.getText());
-            mod.setPass(pass.getText());
-            mod.setLevel(cbxLevel.getSelectedItem().toString());
-            servis.tambahData(mod);
+        if (validData()) {
+            if (jLabel3.getText().equalsIgnoreCase("Perbarui Data Petugas")) {
+                mod.setLevel(cbxLevel.getSelectedItem().toString());
+                servis.ubahData(mod);
+                back();
+            } else {
+                if (cbxLevel.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(this, "Masukkan level petugas terlebih dahulu");
+                } else {
+                    mod.setId(tfId.getText());
+                    mod.setNama(tfNama.getText());
+                    mod.setAlamat(tfAlamat.getText());
+                    mod.setTlp(tfTlp.getText());
+                    mod.setEmail(tfEmail.getText());
+                    mod.setUsername(tfUser.getText());
+                    mod.setPass(pass.getText());
+                    mod.setLevel(cbxLevel.getSelectedItem().toString());
+                    servis.tambahData(mod);
+                    back();
+                }
+            }
         }
-        back();
     }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void hideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMouseClicked
+        pass.setEchoChar('*');
+        hide.setVisible(false);
+        unhide.setVisible(true);
+    }//GEN-LAST:event_hideMouseClicked
+
+    private void unhideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unhideMouseClicked
+        pass.setEchoChar((char) 0);
+        hide.setVisible(true);
+        unhide.setVisible(false);
+    }//GEN-LAST:event_unhideMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -444,6 +495,7 @@ public class TambahPetugas extends javax.swing.JPanel {
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambah;
     private javax.swing.JComboBox<String> cbxLevel;
+    private javax.swing.JLabel hide;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -458,6 +510,7 @@ public class TambahPetugas extends javax.swing.JPanel {
     private javax.swing.JLabel lbFoto;
     private javax.swing.JPasswordField pass;
     private custom.JPanelCustom pnTambah;
+    private javax.swing.JPanel show;
     private javax.swing.JTextField tfAlamat;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfFoto;
@@ -465,6 +518,7 @@ public class TambahPetugas extends javax.swing.JPanel {
     private javax.swing.JTextField tfNama;
     private javax.swing.JTextField tfTlp;
     private javax.swing.JTextField tfUser;
+    private javax.swing.JLabel unhide;
     // End of variables declaration//GEN-END:variables
 
     private void back() {
@@ -474,7 +528,7 @@ public class TambahPetugas extends javax.swing.JPanel {
         pn.repaint();
         pn.revalidate();
     }
-
+    
     private void loadData() {
         tfId.setText(mod.getId());
         tfNama.setText(mod.getNama());
@@ -495,8 +549,32 @@ public class TambahPetugas extends javax.swing.JPanel {
             double scaleY = (double) lbH / (double) imgH;
             double scale = Math.min(scaleX, scaleY);
             Image scaleImg = imgIcon.getImage().getScaledInstance((int) (scale * imgW), (int) (scale * imgH), Image.SCALE_SMOOTH);
-
+            
             lbFoto.setIcon(new ImageIcon(scaleImg));
         }
+    }
+    
+    private boolean validData() {
+        boolean valid = true;
+        if (tfNama.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nama terlebih dahulu");
+        } else if (tfTlp.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nomor telephone terlebih dahulu");
+        } else if (tfAlamat.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan alamat terlebih dahulu");
+        } else if (tfEmail.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan email terlebih dahulu");
+        } else if (tfUser.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan username terlebih dahulu");
+        } else if (pass.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan password terlebih dahulu");
+        }
+        return valid;
     }
 }

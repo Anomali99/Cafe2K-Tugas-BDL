@@ -6,6 +6,7 @@ package view;
 
 import dao.DaoPelanggan;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import model.ModelPelanggan;
 import servis.ServisPelanggan;
 
@@ -21,7 +22,7 @@ public class TambahPelanggan extends javax.swing.JDialog {
     int xx, xy;
     private ServisPelanggan servis = new DaoPelanggan();
     private ModelPelanggan mod = new ModelPelanggan();
-    
+
     public TambahPelanggan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -29,7 +30,7 @@ public class TambahPelanggan extends javax.swing.JDialog {
         tfId.setText(servis.getNomer());
         jLabel1.requestFocus();
     }
-    
+
     public TambahPelanggan(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
@@ -190,6 +191,11 @@ public class TambahPelanggan extends javax.swing.JDialog {
 
         tfTlp.setForeground(new java.awt.Color(79, 42, 24));
         tfTlp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(79, 42, 24)));
+        tfTlp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTlpKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(79, 42, 24));
@@ -318,16 +324,25 @@ public class TambahPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
-        mod.setId(tfId.getText());
-        mod.setNama(tfNama.getText());
-        mod.setTlp(tfTlp.getText());
-        mod.setAlamat(tfAlamat.getText());
-        if (jLabel1.getText().equals("Tambah Data Pelanggan"))
-            servis.tambahData(mod);
-        else
-            servis.ubahData(mod);
-        dispose();
+        if (validData()) {
+            mod.setId(tfId.getText());
+            mod.setNama(tfNama.getText());
+            mod.setTlp(tfTlp.getText());
+            mod.setAlamat(tfAlamat.getText());
+            if (jLabel1.getText().equals("Tambah Data Pelanggan")) {
+                servis.tambahData(mod);
+            } else {
+                servis.ubahData(mod);
+            }
+            dispose();
+        }
     }//GEN-LAST:event_btnSimpanMouseClicked
+
+    private void tfTlpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTlpKeyTyped
+        char a = evt.getKeyChar();
+        if (!Character.isDigit(a))
+            evt.consume();
+    }//GEN-LAST:event_tfTlpKeyTyped
 
     /**
      * @param args the command line arguments
@@ -374,12 +389,10 @@ public class TambahPelanggan extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private custom.JPanelCustom btnBatal;
     private custom.JPanelCustom btnSimpan;
-    private custom.JPanelCustom btnSimpan1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -390,4 +403,19 @@ public class TambahPelanggan extends javax.swing.JDialog {
     private javax.swing.JTextField tfNama;
     private javax.swing.JTextField tfTlp;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validData() {
+        boolean valid = true;
+        if (tfNama.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nama terlebih dahulu");
+        } else if (tfTlp.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan nomor telephone terlebih dahulu");
+        } else if (tfAlamat.getText().equals("")) {
+            valid = false;
+            JOptionPane.showMessageDialog(this, "Masukkan alamat terlebih dahulu");
+        }
+        return valid;
+    }
 }
