@@ -24,7 +24,7 @@ public class FormLogin extends javax.swing.JFrame {
     
     public FormLogin() {
         initComponents();
-        setBackground(new Color(0, 0, 0, 0));
+        setBackground(new Color(0, 0, 0, 0)); 
         tfPass.setEchoChar('*');
         jLabel1.requestFocus();
     }

@@ -73,7 +73,7 @@ public class DaoPetugas implements ServisPetugas {
             st.setString(5, mod.getLevel());
             st.setString(6, mod.getUsername());
             st.executeUpdate();
-            if (!mod.getPass().isEmpty()) {
+            if (mod.getPass()!=null) {
                 ubahPassword(mod);
             }
             if (mod.getFoto() != null) {

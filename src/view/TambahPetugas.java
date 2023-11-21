@@ -461,6 +461,7 @@ public class TambahPetugas extends javax.swing.JPanel {
         if (validData()) {
             if (jLabel3.getText().equalsIgnoreCase("Perbarui Data Petugas")) {
                 mod.setLevel(cbxLevel.getSelectedItem().toString());
+                mod.setPass(null);
                 servis.ubahData(mod);
                 back();
             } else {
