@@ -4,6 +4,7 @@
  */
 package view;
 
+import dao.DaoLaporan;
 import dao.DaoPembelian;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -235,11 +236,6 @@ public class MenuPembelian extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblConten1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblConten1MouseClicked(evt);
-            }
-        });
         jScrollPane2.setViewportView(tblConten1);
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -549,10 +545,6 @@ public class MenuPembelian extends javax.swing.JPanel {
         tblP.setData(mb);
     }//GEN-LAST:event_tblContenMouseClicked
 
-    private void tblConten1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConten1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblConten1MouseClicked
-
     private void btnBatal1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatal1MouseMoved
         btnBatal1.setForeground(Color.WHITE);
         btnBatal1.setIcon(new ImageIcon(getClass().getResource("/img/report.png")));
@@ -564,7 +556,8 @@ public class MenuPembelian extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBatal1MouseExited
 
     private void btnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatal1ActionPerformed
-        // TODO add your handling code here:
+        String no = tfNo.getText();
+        new DaoLaporan().cetakNotaPembelian(no);
     }//GEN-LAST:event_btnBatal1ActionPerformed
 
 

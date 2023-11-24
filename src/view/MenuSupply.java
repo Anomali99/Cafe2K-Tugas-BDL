@@ -4,6 +4,7 @@
  */
 package view;
 
+import dao.DaoLaporan;
 import dao.DaoSupply;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -565,7 +566,7 @@ public class MenuSupply extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBatal1MouseExited
 
     private void btnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatal1ActionPerformed
-        // TODO add your handling code here:
+        new DaoLaporan().cetakNotaSupply(tfNo.getText());
     }//GEN-LAST:event_btnBatal1ActionPerformed
 
 
