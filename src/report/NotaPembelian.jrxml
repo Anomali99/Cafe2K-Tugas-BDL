@@ -54,7 +54,7 @@ WHERE p.no_pembelian = $P{no}]]>
 		<band height="79" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="0" y="0" width="555" height="77" uuid="d17a9f01-f203-4161-b5a8-5ed09220a238"/>
-				<imageExpression><![CDATA["C:\\Users\\fatiq\\Documents\\NetBeansProjects\\Cafe2K\\src\\img\\NotaCafe2K.png"]]></imageExpression>
+				<imageExpression><![CDATA[getClass().getResource("/img/NotaCafe2K.png")]]></imageExpression>
 			</image>
 		</band>
 	</title>

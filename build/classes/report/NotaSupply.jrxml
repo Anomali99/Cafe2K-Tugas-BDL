@@ -54,7 +54,7 @@ WHERE p.no_supply = $P{no}]]>
 		<band height="79" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="0" y="0" width="555" height="77" uuid="d18c9da9-a39a-40e7-b57c-91b118bff8aa"/>
-				<imageExpression><![CDATA["C:\\Users\\fatiq\\Documents\\NetBeansProjects\\Cafe2K\\src\\img\\NotaCafe2K.png"]]></imageExpression>
+				<imageExpression><![CDATA[getClass().getResource("/img/NotaCafe2K.png")]]></imageExpression>
 			</image>
 		</band>
 	</title>
